@@ -1,11 +1,15 @@
 export default function Navbar({
   scrollY,
   heroHeight,
+  page,
+  onNavigate,
 }: {
   scrollY: number;
   heroHeight: number;
+  page: "home" | "projects" | "footer" | "about";
+  onNavigate: (page: "home" | "projects" | "footer" | "about") => void;
 }) {
-  const visible = scrollY > heroHeight; // 👈 KEY FIX
+  const visible = page !== "home" || scrollY > heroHeight;
 
   const linkStyle: React.CSSProperties = {
     fontFamily: "'Manic', serif",
@@ -36,28 +40,55 @@ export default function Navbar({
     >
       {/* LEFT */}
       <div style={{ display: "flex", gap: "30px", alignItems: "center" }}>
-        <a href="#projects" style={linkStyle}>
+        <button
+          type="button"
+          onClick={() => onNavigate("projects")}
+          style={{
+            ...linkStyle,
+            background: "transparent",
+            border: "none",
+            WebkitAppearance: "none",
+            MozAppearance: "none",
+            appearance: "none",
+          }}
+        >
           projects
-        </a>
-        <a href="#about" style={linkStyle}>
+        </button>
+        <button
+          type="button"
+          onClick={() => onNavigate("about")}
+          style={{
+            ...linkStyle,
+            background: "transparent",
+            border: "none",
+            WebkitAppearance: "none",
+            MozAppearance: "none",
+            appearance: "none",
+          }}
+        >
           about
-        </a>
+        </button>
       </div>
 
       <div style={{ width: "90px" }} />
 
       {/* CENTER NAME */}
-      <span
+      <button
+        type="button"
+        onClick={() => onNavigate("home")}
         style={{
           fontFamily: "'Manic', serif",
-          fontSize: "2rem", // 🔼 bigger name
+          fontSize: "2rem",
           color: "#A01D15",
           letterSpacing: "0.04em",
           whiteSpace: "nowrap",
+          border: "none",
+          background: "transparent",
+          cursor: "none",
         }}
       >
         Neeharika
-      </span>
+      </button>
 
       <div style={{ width: "90px" }} />
 
@@ -69,27 +100,32 @@ export default function Navbar({
 
         {/* Contact */}
         <span style={{ position: "relative", display: "inline-flex" }}>
-          <a
-            href="#contact"
+          <button
+            type="button"
+            onClick={() => onNavigate("footer")}
             style={{
               ...linkStyle,
-              padding: "0.15rem 0.7rem",
+              padding: "0.45rem 0.9rem",
               position: "relative",
               zIndex: 2,
+              border: "none",
+              background: "transparent",
+              lineHeight: 1.05,
+              marginTop: "4px",
             }}
           >
             contact
-          </a>
+          </button>
 
           {/* Oval */}
           <svg
             viewBox="0 0 96 38"
             style={{
               position: "absolute",
-              left: "-4px",
-              top: "-5px",
-              width: 96,
-              height: 38,
+              left: "-8px",
+              top: "-8px",
+              width: 104,
+              height: 46,
               pointerEvents: "none",
             }}
           >

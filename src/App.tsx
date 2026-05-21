@@ -3,7 +3,10 @@ import "./styles/global.css";
 import Page1 from "./pages/Page1/Page1";
 import Page2 from "./pages/Page2/Page2";
 import Navbar from "./components/Navbar";
+import Footer from "./pages/Footer/Footer";
+import AboutPage from "./pages/about";
 
+type Page = "home" | "projects" | "footer" | "about";
 const MAX_DRAG = 140;
 
 export default function App() {
@@ -16,6 +19,34 @@ export default function App() {
   const [heroHeight, setHeroHeight] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [page, setPage] = useState<Page>("home");
+
+  const handleNavigate = (target: Page) => {
+    setPage(target);
+
+    if (target === "home" && scrollRef.current) {
+      scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (target === "projects" && scrollRef.current && projectsRef.current) {
+      scrollRef.current.scrollTo({
+        top: projectsRef.current.offsetTop,
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    if (target === "footer" && scrollRef.current && footerRef.current) {
+      scrollRef.current.scrollTo({
+        top: footerRef.current.offsetTop,
+        behavior: "smooth",
+      });
+      return;
+    }
+  };
 
   useEffect(() => {
     if (heroRef.current) {
@@ -101,29 +132,20 @@ export default function App() {
     <circle cx="16" cy="15" r="2" fill="#A01D15"/>
   </svg>`;
 
-  return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        overflow: "hidden",
-        cursor: "none",
-      }}
-    >
-      {/* Dot grid — background */}
+  const pageContent =
+    page === "about" ? (
       <div
         style={{
           position: "fixed",
-          inset: "-300px",
-          backgroundColor: "#EBE3D1",
-          backgroundImage: `radial-gradient(circle, #C9B5AE 1.5px, transparent 1.5px)`,
-          backgroundSize: "100px 100px",
-          backgroundPosition: `calc(50% + ${offset.x}px) calc(50% + ${offset.y}px)`,
-          zIndex: 0,
+          inset: 0,
+          overflowY: "auto",
+          overflowX: "hidden",
+          zIndex: 1,
         }}
-      />
-
-      {/* Scrollable layer — no scrollbar */}
+      >
+        <AboutPage />
+      </div>
+    ) : (
       <div
         ref={scrollRef}
         onScroll={handleScroll}
@@ -133,12 +155,10 @@ export default function App() {
           overflowY: "auto",
           overflowX: "hidden",
           zIndex: 1,
-          scrollbarWidth: "none" /* Firefox */,
-          msOverflowStyle: "none" /* IE/Edge */,
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
         }}
-        /* Chrome/Safari — add to global.css too */
       >
-        {/* Page 1 hero */}
         <section
           ref={heroRef}
           style={{
@@ -152,16 +172,56 @@ export default function App() {
           <Page1 />
         </section>
 
-        {/* Page 2 — also moves with drag */}
-        <div style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}>
+        <section
+          ref={projectsRef}
+          style={{
+            transform: `translate(${offset.x}px, ${offset.y}px)`,
+          }}
+        >
           <Page2 />
-        </div>
+        </section>
+
+        <section
+          ref={footerRef}
+          style={{
+            transform: `translate(${offset.x}px, ${offset.y}px)`,
+          }}
+        >
+          <Footer />
+        </section>
       </div>
+    );
 
-      {/* Navbar — fixed, on top */}
-      <Navbar scrollY={scrollY} heroHeight={heroHeight} />
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        overflow: "hidden",
+        cursor: "none",
+      }}
+    >
+      <div
+        style={{
+          position: "fixed",
+          inset: "-300px",
+          backgroundColor: "#EBE3D1",
+          backgroundImage: `radial-gradient(circle, rgba(160,29,21,0.9) 1.5px, transparent 1.5px)`,
+          backgroundSize: "100px 100px",
+          backgroundPosition: `calc(50% + ${offset.x}px) calc(50% + ${offset.y}px)`,
+          zIndex: 0,
+        }}
+      />
 
-      {/* Flower cursor */}
+      {pageContent}
+
+      <Navbar
+        scrollY={scrollY}
+        heroHeight={heroHeight}
+        page={page}
+        onNavigate={handleNavigate}
+      />
+
       <div
         style={{
           position: "fixed",

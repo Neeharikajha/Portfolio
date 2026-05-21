@@ -199,7 +199,7 @@ export default function Footer() {
           cursor: "none",
         }}
       >
-        neeharikajha05@.com
+        NEEHARIKAJHA05@GMAIL.COM
       </a>
 
       {/* Bottom-right explore arrow */}

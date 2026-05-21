@@ -24,6 +24,7 @@ export default function App() {
   const [page, setPage] = useState<Page>("home");
 
   const handleNavigate = (target: Page) => {
+    console.log("handleNavigate -> target", target, "current page", page);
     setPage(target);
 
     if (target === "home" && scrollRef.current) {
@@ -110,6 +111,7 @@ export default function App() {
   const handleScroll = () => {
     if (scrollRef.current) setScrollY(scrollRef.current.scrollTop);
   };
+
 
   const cursorSize = isClicking ? 32 : 48;
 

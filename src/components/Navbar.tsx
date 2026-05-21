@@ -18,7 +18,12 @@ export default function Navbar({
     textDecoration: "none",
     letterSpacing: "0.03em",
     opacity: 0.95,
-    cursor: "none",
+    cursor: "pointer",
+    background: "transparent",
+    border: "none",
+    WebkitAppearance: "none",
+    MozAppearance: "none",
+    appearance: "none",
   };
 
   return (

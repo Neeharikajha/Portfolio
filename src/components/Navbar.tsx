@@ -9,7 +9,7 @@ export default function Navbar({
   page: "home" | "projects" | "footer" | "about";
   onNavigate: (page: "home" | "projects" | "footer" | "about") => void;
 }) {
-  const visible = page !== "home" || scrollY > heroHeight;
+  const visible = page !== "home" || scrollY > heroHeight - 20;
 
   const linkStyle: React.CSSProperties = {
     fontFamily: "'Manic', serif",

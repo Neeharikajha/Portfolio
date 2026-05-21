@@ -1,4 +1,9 @@
 import React from "react";
+import flower from "../../assets/flower.svg";
+import leftFlower from "../../assets/myprojectleft.svg";
+import rightFlower from "../../assets/myprojectright.svg";
+import MPM from "../../assets/myprojectmid.svg";
+import MPB from "../../assets/myprojectside.svg";
 
 const cards = [
   { bg: "#C4A882", label: "Project 01", aspect: "portrait" },
@@ -67,10 +72,13 @@ function Card({
 
 export default function Page2() {
   // Dimensions matching image 4 proportions
-  const tallW = 195;
-  const tallH = 255;
-  const landW = 255;
-  const landH = 178;
+  const tallW = 450;
+  const tallH = 550;
+  const landW = 400;
+  const landH = 500;
+
+  const card2W = 400;
+  const card2H = 300;
 
   // Positions: left col x=0, right col x=tallW+40
   const col2X = tallW + 40;
@@ -90,22 +98,61 @@ export default function Page2() {
       }}
     >
       {/* Heading */}
-      <h2
+      <div
         style={{
-          fontFamily: "'Manic', serif",
-          fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
-          color: "#A01D15",
-          letterSpacing: "0.04em",
-          WebkitTextStroke: "3px #D4A99A",
-          paintOrder: "stroke fill",
+          position: "relative",
+          display: "inline-block",
           marginBottom: "3rem",
-          lineHeight: 1,
-          textTransform: "uppercase",
-          alignSelf: "center",
         }}
       >
-        My Projects
-      </h2>
+        {/* LEFT SVG */}
+        <img
+          src={leftFlower}
+          alt="left decoration"
+          style={{
+            position: "absolute",
+            left: "-220px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "170px",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* HEADING */}
+        <h2
+          style={{
+            fontFamily: "'Manic', serif",
+            fontSize: "clamp(1.6rem, 4vw, 2.8rem)",
+            color: "#A01D15",
+            letterSpacing: "0.04em",
+            WebkitTextStroke: "3px #D4A99A",
+            paintOrder: "stroke fill",
+            lineHeight: 1,
+            textTransform: "uppercase",
+            textAlign: "center",
+            margin: 0,
+          }}
+        >
+          My
+          <br />
+          Projects
+        </h2>
+
+        {/* RIGHT SVG */}
+        <img
+          src={rightFlower}
+          alt="right decoration"
+          style={{
+            position: "absolute",
+            right: "-220px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "170px",
+            pointerEvents: "none",
+          }}
+        />
+      </div>
 
       {/*
         Exact layout from image 4:
@@ -121,17 +168,32 @@ export default function Page2() {
         }}
       >
         {/* Card 01 — top left, tall, slight left tilt */}
-        <Card
-          card={cards[0]}
+        <div
           style={{
             position: "absolute",
-            left: 0,
+            left: -90,
             top: 0,
             width: tallW,
             height: tallH,
-            transform: "rotate(-1.2deg)",
+            transform: "rotate(0deg)",
+            zIndex: 1,
           }}
-        />
+        >
+          <Card card={cards[0]} style={{ width: "100%", height: "100%" }} />
+
+          {/* 🌸 Flower SVG */}
+          <img
+            src={flower}
+            alt="flower"
+            style={{
+              position: "absolute",
+              bottom: -60, // push slightly outside
+              left: -90, // push slightly outside
+              width: "120px",
+              pointerEvents: "none",
+            }}
+          />
+        </div>
 
         {/* Card 02 — top right, landscape, pushed down */}
         <Card
@@ -140,35 +202,67 @@ export default function Page2() {
             position: "absolute",
             left: col2X,
             top: 42,
-            width: landW,
-            height: landH,
-            transform: "rotate(0.7deg)",
+            width: card2W,
+            height: card2H,
+            transform: "rotate(0deg)",
+            zIndex: 4,
           }}
         />
 
         {/* Card 03 — bottom left, tall, shifted right ~12% */}
-        <Card
-          card={cards[2]}
+        <div
           style={{
             position: "absolute",
             left: Math.round(tallW * 0.12),
             top: tallH + 28,
             width: tallW,
             height: tallH,
-            transform: "rotate(1deg)",
+            zIndex: 2,
           }}
-        />
+        >
+          <Card card={cards[2]} style={{ width: "100%", height: "100%" }} />
+
+          {/* 🌿 Side SVG */}
+          <img
+            src={MPB}
+            alt="side decoration"
+            style={{
+              position: "absolute",
+              right: -310, // hangs slightly outside
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: "890px",
+              pointerEvents: "none",
+              zIndex: -1,
+            }}
+          />
+        </div>
 
         {/* Card 04 — bottom right, landscape */}
         <Card
           card={cards[3]}
           style={{
             position: "absolute",
-            left: col2X,
-            top: tallH + 50,
+            left: col2X + 90,
+            top: tallH - 280,
             width: landW,
             height: landH,
             transform: "rotate(-0.5deg)",
+            zIndex: 3,
+          }}
+        />
+
+        <img
+          src={MPM}
+          alt="middle decoration"
+          style={{
+            position: "absolute",
+            left: col2X - 40,
+            top: tallH - 100,
+            transform: "translate(-50%, -50%)",
+            width: "180px",
+            pointerEvents: "none",
+            zIndex: -1,
           }}
         />
       </div>

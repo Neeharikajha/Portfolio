@@ -104,69 +104,115 @@ export default function Navbar({
         </a>
 
         {/* Contact */}
-        <span style={{ position: "relative", display: "inline-flex" }}>
+        <span
+          style={{
+            position: "relative",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0.2rem 0.4rem",
+          }}
+        >
           <button
             type="button"
             onClick={() => onNavigate("footer")}
             style={{
               ...linkStyle,
-              padding: "0.45rem 0.9rem",
               position: "relative",
               zIndex: 2,
               border: "none",
               background: "transparent",
-              lineHeight: 1.05,
-              marginTop: "4px",
+              lineHeight: 1,
+              color: "#A01D15",
             }}
           >
             contact
           </button>
 
-          {/* Oval */}
+          {/* MAIN SCRIBBLE */}
           <svg
-            viewBox="0 0 96 38"
+            viewBox="0 0 140 80"
             style={{
               position: "absolute",
-              left: "-8px",
-              top: "-8px",
-              width: 104,
-              height: 46,
+              width: "160px",
+              height: "80px",
+              left: "-30px",
+              top: "-20px",
               pointerEvents: "none",
+              overflow: "visible",
             }}
           >
+            {/* TOP OVAL */}
             <path
-              d="M48 4 C22 2, 5 9, 4 19 C3 29, 20 35, 48 34 C76 33, 93 27, 92 18 C91 8, 74 3, 48 4Z"
-              stroke="#6F0F0A"
-              strokeWidth="1.7"
+              d="M32 28
+         C45 8, 98 6, 112 24
+         C120 36, 108 48, 76 50
+         C42 52, 18 44, 20 30
+         C21 22, 24 18, 32 28Z"
+              stroke="#A01D15"
+              strokeWidth="2"
               fill="none"
+              strokeLinecap="round"
+            />
+
+            {/* SECOND OVAL */}
+            <path
+              d="M24 36
+         C36 20, 96 18, 110 34
+         C116 44, 102 56, 70 58
+         C36 60, 14 52, 15 40
+         C16 32, 18 28, 24 36Z"
+              stroke="#A01D15"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+              opacity="0.95"
+            />
+
+            {/* UNDERLINE 1 */}
+            <path
+              d="M40 63 C58 68, 86 66, 118 60"
+              stroke="#A01D15"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+            />
+
+            {/* UNDERLINE 2 */}
+            <path
+              d="M46 70 C70 72, 96 69, 126 64"
+              stroke="#A01D15"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
             />
           </svg>
 
-          {/* Star top right */}
+          {/* TOP STAR */}
           <svg
             viewBox="0 0 16 16"
             style={{
               position: "absolute",
-              top: "-14px",
-              right: "-12px",
+              top: "-16px",
+              right: "-14px",
               width: 13,
               pointerEvents: "none",
             }}
           >
             <path
               d="M8 1 L9.2 6.2 L14 8 L9.2 9.8 L8 15 L6.8 9.8 L2 8 L6.8 6.2Z"
-              stroke="#6F0F0A"
-              strokeWidth="1.2"
+              stroke="#A01D15"
+              strokeWidth="1.3"
               fill="none"
             />
           </svg>
 
-          {/* Star bottom left */}
+          {/* BOTTOM STAR */}
           <svg
             viewBox="0 0 16 16"
             style={{
               position: "absolute",
-              bottom: "-14px",
+              bottom: "-16px",
               left: "-14px",
               width: 11,
               pointerEvents: "none",
@@ -174,8 +220,8 @@ export default function Navbar({
           >
             <path
               d="M8 1 L9.2 6.2 L14 8 L9.2 9.8 L8 15 L6.8 9.8 L2 8 L6.8 6.2Z"
-              stroke="#6F0F0A"
-              strokeWidth="1.1"
+              stroke="#A01D15"
+              strokeWidth="1.2"
               fill="none"
             />
           </svg>

@@ -1,3 +1,5 @@
+import FooterLeft from "../../assets/FooterLeft.svg";
+
 export default function Footer() {
   return (
     <div
@@ -5,15 +7,42 @@ export default function Footer() {
         width: "100vw",
         height: "calc(100vh - 16px)",
         paddingTop: "16px",
+        // paddingLeft: "160px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         position: "relative",
+        zIndex: 1,
         fontFamily: "'Manic', serif",
         color: "#A01D15",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          left: "160px",
+          top: 0,
+          height: "100%",
+          width: "140px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <img
+          src={FooterLeft}
+          alt="doodle"
+          style={{
+            height: "100%",
+            width: "auto",
+            objectFit: "contain",
+          }}
+        />
+      </div>
+
       {/* Top-left */}
       <span
         style={{
@@ -43,8 +72,8 @@ export default function Footer() {
           lineHeight: 1.6,
         }}
       >
-        <div>FIND ME HERE</div>
-        <div>NEEHARIKA.DEV</div>
+        <div>Check Github</div>
+        <div>Neeharikajha</div>
       </div>
 
       {/* Two-person credits */}
@@ -214,21 +243,6 @@ export default function Footer() {
           gap: "0.3rem",
         }}
       >
-        {/* Expand icon */}
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#A01D15"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        >
-          <polyline points="15 3 21 3 21 9" />
-          <polyline points="9 21 3 21 3 15" />
-          <line x1="21" y1="3" x2="14" y2="10" />
-          <line x1="3" y1="21" x2="10" y2="14" />
-        </svg>
         <span
           style={{
             fontFamily: "'Caveat', cursive",
@@ -238,7 +252,7 @@ export default function Footer() {
             letterSpacing: "0.04em",
           }}
         >
-          Love
+          with love
         </span>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import FooterLeft from "../../assets/FooterLeft.svg";
+import FooterCurl from "../../assets/FooterCurl.svg";
 
 export default function Footer() {
   return (
@@ -33,8 +33,8 @@ export default function Footer() {
         }}
       >
         <img
-          src={FooterLeft}
-          alt="doodle"
+          src={FooterCurl}
+          alt="footer curl"
           style={{
             height: "100%",
             width: "auto",

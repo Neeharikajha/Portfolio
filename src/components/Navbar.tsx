@@ -117,7 +117,13 @@ export default function Navbar({
 
         {/* RIGHT */}
         <div style={{ display: "flex", gap: "30px", alignItems: "center" }}>
-          <a href="#resume" style={linkStyle}>
+          <a
+            href="https://drive.google.com/uc?export=download&id=1LMmF_fvHrX2Jvrso12Y-EUVIGUnkUUXj"
+            target="_blank"
+            rel="noreferrer"
+            download
+            style={linkStyle}
+          >
             resume
           </a>
 

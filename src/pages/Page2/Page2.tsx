@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import flower from "../../assets/flower.svg";
 import leftFlower from "../../assets/myprojectleft.svg";
 import rightFlower from "../../assets/myprojectright.svg";
@@ -11,25 +11,33 @@ import cloth from "../../images/MyProject/tryon.jpg";
 
 const cards = [
   {
-    bg: "#C4A882",
+    title: "Gullak",
+    description: "Savings platform for daily wage earners",
+    repo: "https://github.com/Neeharikajha/Pension",
     label: "Project 01",
     aspect: "portrait",
     image: gullak,
   },
   {
-    bg: "#B8956A",
+    title: "FarmGrow",
+    description: "Eliminating middlemen between farmers and consumers",
+    repo: "https://github.com/Neeharikajha/farmGrow",
     label: "Project 02",
     aspect: "landscape",
     image: farmer,
   },
   {
-    bg: "#8C6E52",
+    title: "MyntraLens",
+    description: "AR try-on of clothes",
+    repo: "https://github.com/Neeharikajha/final-lens",
     label: "Project 03",
     aspect: "portrait",
     image: cloth,
   },
   {
-    bg: "#6B4F38",
+    title: "Event Flow Orchestration Engine",
+    description: "Orchestrating event flow",
+    repo: "https://github.com/Neeharikajha/Event-Flow-Orchestration-Engine",
     label: "Project 04",
     aspect: "landscape",
     image: event,
@@ -43,6 +51,8 @@ function Card({
   card: (typeof cards)[0];
   style?: React.CSSProperties;
 }) {
+  const [hover, setHover] = useState(false);
+
   return (
     <div
       style={{
@@ -51,16 +61,18 @@ function Card({
         borderRadius: "2px",
         overflow: "hidden",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        cursor: "none",
+        cursor: "pointer",
         ...style,
       }}
       onMouseEnter={(e) => {
+        setHover(true);
         (e.currentTarget as HTMLDivElement).style.transform =
           (style?.transform ?? "") + " scale(1.03)";
         (e.currentTarget as HTMLDivElement).style.boxShadow =
           "6px 10px 28px rgba(100,50,30,0.28)";
       }}
       onMouseLeave={(e) => {
+        setHover(false);
         (e.currentTarget as HTMLDivElement).style.transform =
           style?.transform ?? "";
         (e.currentTarget as HTMLDivElement).style.boxShadow =
@@ -78,6 +90,7 @@ function Card({
           alignItems: "flex-end",
           padding: "0.7rem",
           boxSizing: "border-box",
+          filter: "brightness(0.85)",
         }}
       >
         <span
@@ -85,12 +98,82 @@ function Card({
             fontFamily: "'Manic', serif",
             fontSize: "0.82rem",
             color: "#EBE3D1",
-            opacity: 0.75,
+            opacity: 0.85,
             letterSpacing: "0.06em",
           }}
         >
           {card.label}
         </span>
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "rgba(10,10,10,0.75)",
+          color: "#fff",
+          opacity: hover ? 1 : 0,
+          pointerEvents: hover ? "auto" : "none",
+          transition: "opacity 0.25s ease",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "1.4rem",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Manic', serif",
+            fontSize: "1.2rem",
+            lineHeight: 1.2,
+            marginBottom: "0.75rem",
+          }}
+        >
+          {card.title}
+        </div>
+        <div
+          style={{
+            fontFamily: "'Caveat', cursive",
+            fontSize: "0.95rem",
+            opacity: 0.85,
+            marginBottom: "1rem",
+            maxWidth: "240px",
+          }}
+        >
+          {card.description}
+        </div>
+        <a
+          href={card.repo}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            fontFamily: "'Manic', serif",
+            fontSize: "0.95rem",
+            color: "#EBE3D1",
+            textDecoration: "underline",
+            textUnderlineOffset: "4px",
+            padding: "0.45rem 1rem",
+            border: "1px solid rgba(235,235,235,0.4)",
+            borderRadius: "999px",
+            background: "rgba(255,255,255,0.05)",
+            transition: "background 0.2s ease, transform 0.2s ease",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.background =
+              "rgba(255,255,255,0.16)";
+            (e.currentTarget as HTMLAnchorElement).style.transform =
+              "translateY(-1px)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.background =
+              "rgba(255,255,255,0.05)";
+            (e.currentTarget as HTMLAnchorElement).style.transform = "none";
+          }}
+        >
+          View repo
+        </a>
       </div>
     </div>
   );

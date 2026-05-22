@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./styles/global.css";
 import Page1 from "./pages/Page1/Page1";
 import Page2 from "./pages/Page2/Page2";
@@ -25,15 +25,16 @@ export default function App() {
   const [page, setPage] = useState<Page>("home");
 
   const handleNavigate = (target: Page) => {
-    console.log("handleNavigate -> target", target, "current page", page);
     setPage(target);
+  };
 
-    if (target === "home" && scrollRef.current) {
+  useLayoutEffect(() => {
+    if (page === "home" && scrollRef.current) {
       scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    if (target === "projects" && scrollRef.current && projectsRef.current) {
+    if (page === "projects" && scrollRef.current && projectsRef.current) {
       scrollRef.current.scrollTo({
         top: projectsRef.current.offsetTop,
         behavior: "smooth",
@@ -41,24 +42,19 @@ export default function App() {
       return;
     }
 
-    if (target === "about") {
-      // ensure about view opens and is scrolled to top
-      setTimeout(() => {
-        if (aboutRef.current) {
-          aboutRef.current.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      }, 40);
-      return;
-    }
-
-    if (target === "footer" && scrollRef.current && footerRef.current) {
+    if (page === "footer" && scrollRef.current && footerRef.current) {
       scrollRef.current.scrollTo({
         top: footerRef.current.offsetTop,
         behavior: "smooth",
       });
       return;
     }
-  };
+
+    if (page === "about" && aboutRef.current) {
+      aboutRef.current.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+  }, [page]);
 
   useEffect(() => {
     if (heroRef.current) {

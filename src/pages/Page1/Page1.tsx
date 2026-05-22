@@ -29,27 +29,27 @@ export default function Page1() {
           alt="flower"
           style={{
             position: "absolute",
-            right: "-360px", // 👉 move left/right
-            top: "-100%", // 👉 move up/down
-            width: "280px", // 👉 size
+            right: "-360px",
+            top: "-100%",
+            width: "280px",
             pointerEvents: "none",
           }}
         />
 
-        {/* ✨ SPARK INNER (ISL) */}
+        {/* ✨ SPARK INNER */}
         <img
           src={ISL}
           alt="spark inner"
           style={{
             position: "absolute",
-            left: "-60px", // 👉 horizontal adjust
-            top: "-50px", // 👉 vertical adjust
+            left: "-60px",
+            top: "-50px",
             width: "100px",
             zIndex: 1,
           }}
         />
 
-        {/* ✨ SPARK OUTER (OSL) */}
+        {/* ✨ SPARK OUTER */}
         <img
           src={OSL}
           alt="spark outer"
@@ -62,7 +62,7 @@ export default function Page1() {
           }}
         />
 
-        {/* ✍️ CREATE (on top of sparks) */}
+        {/* ✍️ CREATE */}
         <img
           src={create}
           alt="create"
@@ -92,29 +92,86 @@ export default function Page1() {
           Neeharika
         </h1>
 
-        {/* ➖ LINE (under "harika") */}
+        {/* 🔼 ABOVE H → WEB */}
+        <div
+          style={{
+            position: "absolute",
+            left: "38%", // tweak if needed
+            top: "-40px",
+            fontFamily: "'Manic', serif",
+            fontSize: "32px",
+            color: "#A01D15",
+          }}
+        >
+          web
+        </div>
+
+        {/* 🔼 ABOVE A → APP */}
+        <div
+          style={{
+            position: "absolute",
+            left: "100%", // tweak if needed
+            top: "15px",
+            fontFamily: "'Manic', serif",
+            fontSize: "32px",
+            color: "#A01D15",
+          }}
+        >
+          app
+        </div>
+
+        {/* ➖ LINE */}
         <img
           src={line}
           alt="underline"
           style={{
             position: "absolute",
-            left: "50%", // 👉 controls where "harika" starts
-            bottom: "-35px", // 👉 distance below text
+            left: "50%",
+            bottom: "-35px",
             width: "360px",
           }}
         />
 
-        {/* 🔨 BUILD (at end of line) */}
+        {/* 🔨 BUILD */}
         <img
           src={build}
           alt="build"
           style={{
             position: "absolute",
-            left: "100%", // 👉 aligns to end of line
+            left: "100%",
             bottom: "-55px",
             width: "90px",
           }}
         />
+
+        {/* 🔽 BELOW SCRIBBLE → & MORE */}
+        <div
+          style={{
+            position: "absolute",
+            left: "65%",
+            bottom: "-85px",
+            fontFamily: "'Manic', serif",
+            fontSize: "16px",
+            color: "#A01D15",
+          }}
+        >
+          & more
+        </div>
+
+        {/* 👇 BELOW "N" → SUBTEXT */}
+        <div
+          style={{
+            position: "absolute",
+            left: "0%",
+            bottom: "-120px",
+            fontFamily: "Manic",
+            fontSize: "32px",
+            color: "#A01D15",
+            lineHeight: "1",
+          }}
+        >
+          Developer & <br /> designer
+        </div>
       </div>
     </div>
   );

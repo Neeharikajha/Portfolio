@@ -67,9 +67,9 @@ export default function PolaroidCard({
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             filter: image
-              ? "grayscale(100%) brightness(1.05) contrast(0.95)"
+              ? "grayscale(100%) brightness(0.80) contrast(1)"
               : undefined,
-            opacity: image ? 0.92 : 1,
+            opacity: image ? 0.95 : 1,
             display: "flex",
             alignItems: "flex-end",
             padding: "4px",

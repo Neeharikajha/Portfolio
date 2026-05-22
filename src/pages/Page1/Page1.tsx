@@ -20,6 +20,7 @@ export default function Page1() {
         style={{
           position: "relative",
           display: "inline-block",
+          marginTop: "40px",
         }}
       >
         {/* 🌸 RIGHT FLOWER */}

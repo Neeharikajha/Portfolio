@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PolaroidCard from "./PolaroidCard";
 
 import arrow from "../../assets/AboutArrow.svg";
 import star from "../../assets/AboutStar.svg";
 import scratch from "../../assets/virarscribble.svg";
 import pin from "../../assets/newpin.svg";
-import cherry from "../../assets/AboutStar.svg"; // ⚠️ replace if you have real cherry svg
+import cherry from "../../assets/AboutStar.svg";
+
+import beach from "../../images/About/1beach.png";
+import baby from "../../images/About/babynew.png";
+import pasta from "../../images/About/3pasta.png";
+import cowboy from "../../images/About/4cowboy.png";
+import burger from "../../images/About/5burger.png";
+import fish from "../../images/About/6fishnew.png";
+import beer from "../../images/About/8beer.png";
+import bear from "../../images/About/9cute.png";
 
 export default function AboutCollage() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -36,8 +45,6 @@ export default function AboutCollage() {
           position: "relative",
           width: "100%",
           height: "100%",
-          backgroundImage: "radial-gradient(#d6cbb8 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
           transform: `translate(${offset.x}px, ${offset.y}px)`,
         }}
       >
@@ -99,6 +106,7 @@ export default function AboutCollage() {
           <PolaroidCard
             label="1"
             tornVariant={1}
+            image={beach}
             style={{ top: 50, left: -70, width: 250, height: 200 }}
           />
 
@@ -106,6 +114,9 @@ export default function AboutCollage() {
           <PolaroidCard
             label="2"
             tornVariant={2}
+            image={baby}
+            imageScale="100%"
+            innerPadding="6px"
             style={{ top: 60, left: 200, width: 250, height: 210 }}
           />
 
@@ -114,6 +125,7 @@ export default function AboutCollage() {
             <PolaroidCard
               label="3"
               tornVariant={3}
+              image={pasta}
               style={{ width: 190, height: 145 }}
             />
 
@@ -133,13 +145,15 @@ export default function AboutCollage() {
           <PolaroidCard
             label="4"
             tornVariant={4}
-            style={{ top: 240, left: -160, width: 240, height: 110 }}
+            image={cowboy}
+            style={{ top: 240, left: -160, width: 240, height: 210 }}
           />
 
           {/* CARD 5 */}
           <PolaroidCard
             label="5"
             tornVariant={5}
+            image={burger}
             style={{ top: 200, left: 120, width: 250, height: 200 }}
           />
 
@@ -148,7 +162,8 @@ export default function AboutCollage() {
             <PolaroidCard
               label="6"
               tornVariant={6}
-              style={{ width: 210, height: 185 }}
+              image={fish}
+              style={{ width: 210, height: 205 }}
             />
 
             {/* ⭐ STAR */}
@@ -180,6 +195,7 @@ export default function AboutCollage() {
           <PolaroidCard
             label="8"
             tornVariant={8}
+            image={beer}
             style={{ top: 350, left: 50, width: 200, height: 180 }}
           />
 
@@ -187,7 +203,8 @@ export default function AboutCollage() {
           <PolaroidCard
             label="9"
             tornVariant={9}
-            style={{ top: 250, left: 400, width: 110, height: 110 }}
+            image={bear}
+            style={{ top: 210, left: 400, width: 180, height: 150 }}
           />
         </div>
 

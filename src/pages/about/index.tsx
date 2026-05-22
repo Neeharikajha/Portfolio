@@ -1,4 +1,5 @@
 import AboutCollage from "../../pages/about/AboutCollage";
+import Footer from "../Footer/Footer";
 // ⚠️ adjust path if your folder is different
 
 export default function AboutPage() {
@@ -7,12 +8,17 @@ export default function AboutPage() {
       style={{
         width: "100%",
         minHeight: "100vh",
-        background: "#f5efe6", // soft paper bg (optional)
+        background: "transparent",
         overflow: "hidden",
       }}
     >
       {/* 🧩 COLLAGE SECTION */}
       <AboutCollage />
+
+      {/* FOOTER: placed below about section */}
+      <div style={{ marginTop: "40px" }}>
+        <Footer />
+      </div>
     </main>
   );
 }

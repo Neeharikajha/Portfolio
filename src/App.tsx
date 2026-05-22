@@ -21,6 +21,7 @@ export default function App() {
   const heroRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState<Page>("home");
 
   const handleNavigate = (target: Page) => {
@@ -37,6 +38,16 @@ export default function App() {
         top: projectsRef.current.offsetTop,
         behavior: "smooth",
       });
+      return;
+    }
+
+    if (target === "about") {
+      // ensure about view opens and is scrolled to top
+      setTimeout(() => {
+        if (aboutRef.current) {
+          aboutRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }, 40);
       return;
     }
 
@@ -112,7 +123,6 @@ export default function App() {
     if (scrollRef.current) setScrollY(scrollRef.current.scrollTop);
   };
 
-
   const cursorSize = isClicking ? 32 : 48;
 
   const flowerIdle = `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -137,6 +147,7 @@ export default function App() {
   const pageContent =
     page === "about" ? (
       <div
+        ref={aboutRef}
         style={{
           position: "fixed",
           inset: 0,
@@ -206,10 +217,10 @@ export default function App() {
       <div
         style={{
           position: "fixed",
-          inset: "-300px",
+          inset: "-1200px",
           backgroundColor: "#EBE3D1",
-          backgroundImage: `radial-gradient(circle, rgba(160,29,21,0.9) 1.5px, transparent 1.5px)`,
-          backgroundSize: "100px 100px",
+          backgroundImage: `radial-gradient(#d6cbb8 1px, transparent 1px)`,
+          backgroundSize: "20px 20px",
           backgroundPosition: `calc(50% + ${offset.x}px) calc(50% + ${offset.y}px)`,
           zIndex: 0,
         }}

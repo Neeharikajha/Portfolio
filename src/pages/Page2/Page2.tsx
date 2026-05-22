@@ -4,12 +4,36 @@ import leftFlower from "../../assets/myprojectleft.svg";
 import rightFlower from "../../assets/myprojectright.svg";
 import MPM from "../../assets/myprojectmid.svg";
 import MPB from "../../assets/myprojectside.svg";
+import farmer from "../../images/MyProject/FarmerPin.jpg";
+import event from "../../images/MyProject/EventOrchestration.jpg";
+import gullak from "../../images/MyProject/gullak.jpg";
+import cloth from "../../images/MyProject/tryon.jpg";
 
 const cards = [
-  { bg: "#C4A882", label: "Project 01", aspect: "portrait" },
-  { bg: "#B8956A", label: "Project 02", aspect: "landscape" },
-  { bg: "#8C6E52", label: "Project 03", aspect: "portrait" },
-  { bg: "#6B4F38", label: "Project 04", aspect: "landscape" },
+  {
+    bg: "#C4A882",
+    label: "Project 01",
+    aspect: "portrait",
+    image: gullak,
+  },
+  {
+    bg: "#B8956A",
+    label: "Project 02",
+    aspect: "landscape",
+    image: farmer,
+  },
+  {
+    bg: "#8C6E52",
+    label: "Project 03",
+    aspect: "portrait",
+    image: cloth,
+  },
+  {
+    bg: "#6B4F38",
+    label: "Project 04",
+    aspect: "landscape",
+    image: event,
+  },
 ];
 
 function Card({
@@ -47,7 +71,9 @@ function Card({
         style={{
           width: "100%",
           height: "100%",
-          background: `linear-gradient(160deg, ${card.bg} 40%, rgba(160,29,21,0.2))`,
+          backgroundSize: "cover",
+          backgroundImage: `url(${card.image})`,
+          backgroundPosition: "center",
           display: "flex",
           alignItems: "flex-end",
           padding: "0.7rem",

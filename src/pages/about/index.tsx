@@ -1,9 +1,17 @@
-import AboutCollage from "./AboutCollage.tsx";
+import AboutCollage from "../../pages/about/AboutCollage";
+// ⚠️ adjust path if your folder is different
 
 export default function AboutPage() {
-  console.log("AboutPage render");
   return (
-    <main className="min-h-screen w-screen overflow-hidden bg-[#ebe3d1]">
+    <main
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        background: "#f5efe6", // soft paper bg (optional)
+        overflow: "hidden",
+      }}
+    >
+      {/* 🧩 COLLAGE SECTION */}
       <AboutCollage />
     </main>
   );

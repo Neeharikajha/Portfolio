@@ -5,6 +5,7 @@ import Page2 from "./pages/Page2/Page2";
 import Navbar from "./components/Navbar";
 import Footer from "./pages/Footer/Footer";
 import AboutPage from "./pages/about";
+import Projects from "./pages/Projects/Projects";
 
 type Page = "home" | "projects" | "footer" | "about";
 const MAX_DRAG = 140;
@@ -23,6 +24,11 @@ export default function App() {
   const footerRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState<Page>("home");
+  const [hideNavbar, setHideNavbar] = useState(false);
+
+  useEffect(() => {
+    setHideNavbar(false);
+  }, [page]);
 
   const handleNavigate = (target: Page) => {
     setPage(target);
@@ -154,6 +160,18 @@ export default function App() {
       >
         <AboutPage />
       </div>
+    ) : page === "projects" ? (
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          overflowY: "auto",
+          overflowX: "hidden",
+          zIndex: 1,
+        }}
+      >
+        <Projects onModalStateChange={setHideNavbar} />
+      </div>
     ) : (
       <div
         ref={scrollRef}
@@ -224,12 +242,14 @@ export default function App() {
 
       {pageContent}
 
-      <Navbar
-        scrollY={scrollY}
-        heroHeight={heroHeight}
-        page={page}
-        onNavigate={handleNavigate}
-      />
+      {!hideNavbar && (
+        <Navbar
+          scrollY={scrollY}
+          heroHeight={heroHeight}
+          page={page}
+          onNavigate={handleNavigate}
+        />
+      )}
 
       <div
         style={{

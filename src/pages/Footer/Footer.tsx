@@ -52,7 +52,7 @@ export default function Footer() {
           fontSize: "0.75rem",
           letterSpacing: "0.1em",
           opacity: 0.6,
-          fontFamily: "'Caveat', cursive",
+          fontFamily: "'Manic', serif",
         }}
       >
         THANK YOU!
@@ -68,7 +68,7 @@ export default function Footer() {
           fontSize: "0.7rem",
           letterSpacing: "0.1em",
           opacity: 0.6,
-          fontFamily: "'Caveat', cursive",
+          fontFamily: "'Manic', serif",
           lineHeight: 1.6,
         }}
       >
@@ -123,7 +123,7 @@ export default function Footer() {
           </span>
           <span
             style={{
-              fontFamily: "'Caveat', cursive",
+              fontFamily: "'Manic', serif",
               fontSize: "0.9rem",
               color: "#A01D15",
               opacity: 0.65,
@@ -185,7 +185,7 @@ export default function Footer() {
           </span>
           <span
             style={{
-              fontFamily: "'Caveat', cursive",
+              fontFamily: "'Manic', serif",
               fontSize: "0.9rem",
               color: "#A01D15",
               opacity: 0.65,
@@ -219,7 +219,7 @@ export default function Footer() {
       <a
         href="mailto:neeharikajha05@gmail.com"
         style={{
-          fontFamily: "'Caveat', cursive",
+          fontFamily: "'Manic', serif",
           fontSize: "0.85rem",
           letterSpacing: "0.12em",
           color: "#A01D15",
@@ -245,7 +245,7 @@ export default function Footer() {
       >
         <span
           style={{
-            fontFamily: "'Caveat', cursive",
+            fontFamily: "'Manic', serif",
             fontSize: "1rem",
             color: "#A01D15",
             opacity: 0.7,

@@ -58,26 +58,43 @@ export default function VideoPreview({
     ...(right !== undefined && { marginRight: `${right}px` }),
   };
 
+  const isImagePreview = videoSrc
+    .toLowerCase()
+    .match(/\.(jpg|jpeg|png|webp|svg)$/);
+
   return (
     <>
       <div style={style} onClick={handleOpenModal}>
-        <video
-          src={videoSrc}
-          autoPlay
-          loop
-          muted
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
+        {isImagePreview ? (
+          <img
+            src={videoSrc}
+            alt={overlayText}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+        ) : (
+          <video
+            src={videoSrc}
+            autoPlay
+            loop
+            muted
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        )}
         {/* OVERLAY TEXT */}
         <div
           style={{
             position: "absolute",
-            bottom: "-70px",
-            right: "300px",
+            bottom: "-60px",
+            right: "230px",
             fontFamily: "'Manic', serif",
             fontSize: overlayTextSize,
             color: overlayTextColor,

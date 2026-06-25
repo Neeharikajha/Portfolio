@@ -1,14 +1,23 @@
+export interface ProjectSection {
+  heading: string;
+  content: string;
+}
+
+export interface ProjectLink {
+  label: string;
+  url: string;
+}
+
 export interface ProjectDetails {
   title: string;
-  problemStatement: string;
-  solution: string;
-  techStack: string;
+  sections: ProjectSection[];
   images: {
     key: string;
     src: string;
     caption: string;
     width?: string;
   }[];
+  links?: ProjectLink[];
 }
 
 interface ProjectModalProps {
@@ -26,9 +35,9 @@ export default function ProjectModal({
   maxWidth = "800px",
   height = "50vh",
 }: ProjectModalProps) {
-  // Parse and render the solution text with diagrams embedded in the flow
-  const renderSolutionWithImages = () => {
-    const remainingText = projectDetails.solution;
+  // Parse and render content with images and videos embedded inline
+  const renderContentWithMedia = (contentString: string) => {
+    const remainingText = contentString;
     const placeholderRegex = /\(\*\*insert ([a-zA-Z0-9 ]+)\*\*\)/g;
 
     let match;
@@ -52,15 +61,16 @@ export default function ProjectModal({
         );
       }
 
-      // Look up corresponding image specification
-      const imageObj = projectDetails.images.find(
+      // Look up corresponding image/video specification
+      const mediaObj = projectDetails.images.find(
         (img) => img.key.toLowerCase().replace(/\s+/g, "") === imageKey,
       );
 
-      if (imageObj) {
+      if (mediaObj) {
+        const isVideo = mediaObj.src.toLowerCase().endsWith(".mp4");
         elements.push(
           <div
-            key={`img-container-${keyCounter++}`}
+            key={`media-container-${keyCounter++}`}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -74,31 +84,46 @@ export default function ProjectModal({
                 borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
-                width: imageObj.width || "100%",
+                width: mediaObj.width || "100%",
                 maxWidth: "100%",
               }}
             >
-              <img
-                src={imageObj.src}
-                alt={imageObj.caption}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  display: "block",
-                }}
-              />
+              {isVideo ? (
+                <video
+                  src={mediaObj.src}
+                  controls
+                  autoPlay
+                  loop
+                  muted
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                  }}
+                />
+              ) : (
+                <img
+                  src={mediaObj.src}
+                  alt={mediaObj.caption}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                  }}
+                />
+              )}
             </div>
             <span
               style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "1.3rem",
+                fontFamily: "'Manic', serif",
+                fontSize: "calc(1rem + 2px)",
                 fontWeight: "bold",
                 color: "#A01D15",
                 marginTop: "10px",
-                letterSpacing: "0.05em",
+                letterSpacing: "0.02em",
               }}
             >
-              {imageObj.caption}
+              {mediaObj.caption}
             </span>
           </div>,
         );
@@ -150,7 +175,9 @@ export default function ProjectModal({
           width: width,
           maxWidth: maxWidth,
           height: height,
-          backgroundColor: "#F5F1ED",
+          backgroundColor: "#EBE3D1",
+          backgroundImage: "radial-gradient(#d6cbb8 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
           borderTopLeftRadius: "20px",
           borderTopRightRadius: "20px",
           zIndex: 1000,
@@ -171,10 +198,10 @@ export default function ProjectModal({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "24px",
+            fontSize: "26px",
             color: "#A01D15",
             zIndex: 1010,
-            backgroundColor: "rgba(245, 241, 237, 0.85)",
+            backgroundColor: "rgba(235, 227, 209, 0.85)",
             borderRadius: "50%",
             boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
           }}
@@ -192,103 +219,98 @@ export default function ProjectModal({
             padding: "40px 32px 50px 32px",
             boxSizing: "border-box",
             textAlign: "left",
+            fontFamily: "'Manic', serif",
           }}
         >
           {/* PROJECT TITLE */}
           <h1
             style={{
               fontFamily: "'Manic', serif",
-              fontSize: "clamp(1.8rem, 4vh, 3.2rem)",
+              fontSize: "calc(clamp(1.8rem, 4vh, 2.6rem) + 2px)",
+              fontWeight: "bold",
               color: "#A01D15",
-              letterSpacing: "0.04em",
-              WebkitTextStroke: "2px #D4A99A",
-              paintOrder: "stroke fill",
+              letterSpacing: "-0.02em",
               lineHeight: 1.1,
               textTransform: "uppercase",
-              margin: "0 0 32px 0",
+              margin: "0 0 16px 0",
               textAlign: "center",
             }}
           >
             {projectDetails.title}
           </h1>
 
-          {/* PROBLEM STATEMENT */}
-          <div style={{ marginBottom: "28px" }}>
-            <h3
-              style={{
-                fontFamily: "'Manic', serif",
-                fontSize: "1.45rem",
-                color: "#A01D15",
-                margin: "0 0 10px 0",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Problem Statement:
-            </h3>
-            <p
-              style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "1.35rem",
-                color: "#6b6375",
-                lineHeight: 1.45,
-                margin: 0,
-              }}
-            >
-              {projectDetails.problemStatement}
-            </p>
-          </div>
-
-          {/* SOLUTION */}
-          <div style={{ marginBottom: "28px" }}>
-            <h3
-              style={{
-                fontFamily: "'Manic', serif",
-                fontSize: "1.45rem",
-                color: "#A01D15",
-                margin: "0 0 10px 0",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Solution:
-            </h3>
+          {/* PROJECT LINKS */}
+          {projectDetails.links && projectDetails.links.length > 0 && (
             <div
               style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "1.35rem",
-                color: "#6b6375",
-                lineHeight: 1.45,
-                margin: 0,
+                display: "flex",
+                gap: "12px",
+                justifyContent: "center",
+                marginBottom: "32px",
               }}
             >
-              {renderSolutionWithImages()}
+              {projectDetails.links.map((link, idx) => (
+                <a
+                  key={idx}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    fontFamily: "'Manic', serif",
+                    fontSize: "calc(0.95rem + 2px)",
+                    fontWeight: "600",
+                    color: "#A01D15",
+                    textDecoration: "none",
+                    padding: "6px 18px",
+                    border: "1.5px solid rgba(160, 29, 21, 0.4)",
+                    borderRadius: "999px",
+                    backgroundColor: "rgba(235, 227, 209, 0.5)",
+                    cursor: "pointer",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+                    transition: "background-color 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "rgba(160, 29, 21, 0.08)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "rgba(235, 227, 209, 0.5)";
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
-          </div>
+          )}
 
-          {/* TECH STACK */}
-          <div>
-            <h3
-              style={{
-                fontFamily: "'Manic', serif",
-                fontSize: "1.45rem",
-                color: "#A01D15",
-                margin: "0 0 10px 0",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Tech Stack:
-            </h3>
-            <p
-              style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: "1.35rem",
-                color: "#6b6375",
-                lineHeight: 1.45,
-                margin: 0,
-              }}
-            >
-              {projectDetails.techStack}
-            </p>
-          </div>
+          {/* DYNAMIC SECTIONS */}
+          {projectDetails.sections.map((section, idx) => (
+            <div key={idx} style={{ marginBottom: "28px" }}>
+              <h3
+                style={{
+                  fontFamily: "'Manic', serif",
+                  fontSize: "calc(1.2rem + 2px)",
+                  fontWeight: "bold",
+                  color: "#A01D15",
+                  margin: "0 0 10px 0",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {section.heading}
+              </h3>
+              <div
+                style={{
+                  fontFamily: "'Manic', serif",
+                  fontSize: "calc(1.05rem + 2px)",
+                  color: "#6b6375",
+                  lineHeight: 1.5,
+                  margin: 0,
+                  whiteSpace: "pre-line",
+                }}
+              >
+                {renderContentWithMedia(section.content)}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>
